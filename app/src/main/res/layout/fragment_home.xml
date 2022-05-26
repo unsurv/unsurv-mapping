@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <org.osmdroid.views.MapView
+            android:id="@+id/manual_capture_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <TextView
+            android:id="@+id/center_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:id="@+id/manual_capture_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/standard_camera_marker_5_dpi"
+            android:layout_above="@id/center_view"
+            android:layout_centerHorizontal="true"/>
+
+
+        <ImageButton
+            android:id="@+id/manual_capture_add_unknown_camera_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/add_unknown_camera_button"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="230dp"
+            android:layout_marginEnd="20dp"
+            />
+
+
+        <ImageButton
+            android:id="@+id/manual_capture_add_dome_camera_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/add_dome_camera_button"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="160dp"
+            android:layout_marginEnd="20dp"
+            />
+
+        <ImageButton
+            android:id="@+id/manual_capture_add_standard_camera_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/add_regular_camera_button"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="90dp"
+            android:layout_marginEnd="20dp"/>
+
+
+        <ImageButton
+            android:id="@+id/manual_save_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_save_white_24dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <ImageButton
+            android:id="@+id/manual_to_grid"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_grid_on_grey_40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/manual_save_button"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"/>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
