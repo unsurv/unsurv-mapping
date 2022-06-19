@@ -1,6 +1,23 @@
 <resources>
     <string name="app_name">unsurv-mapping</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">Map</string>
+    <string name="title_dashboard">History</string>
     <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--in EditCamera-->
+    <string name="type_text">Type:</string>
+    <string name="area_text">Area:</string>
+    <string name="mount_text">Mounted on:</string>
+    <string name="direction_text">Direction:</string>
+    <string name="height_text">Height (m):</string>
+    <string name="timestamp_not_available">not available</string>
+    <string name="no_comment">no comments available</string>
+    <string name="timestamp_text">Camera captured on:</string>
+    <string name="upload_text">Camera upload on:</string>
+    <string name="comment_text">Comments:</string>
+    <string name="angle_text">Angle (from horizontal):</string>
+    <string name="edit_button">EDIT LOCATION</string>
+    <string name="save_button">SAVE &amp; GO</string>
 </resources>
