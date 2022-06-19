@@ -57,7 +57,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class HomeFragment extends Fragment {
+public class MapFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private MapView mapView;
@@ -294,8 +294,6 @@ public class HomeFragment extends Fragment {
 
                         Bundle args = new Bundle();
                         args.putLong("cameraId", idFromInsert);
-
-
 
                         NavController navController = NavHostFragment.findNavController(requireParentFragment());
                         navController.navigate(R.id.editCameraFragment, args);

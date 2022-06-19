@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">unsurv-mapping</string>
     <string name="title_home">Map</string>
-    <string name="title_dashboard">History</string>
-    <string name="title_notifications">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_history">History</string>
+    <string name="title_notifications">Settings</string>
 
     <!--in EditCamera-->
     <string name="type_text">Type:</string>
@@ -20,4 +18,13 @@
     <string name="angle_text">Angle (from horizontal):</string>
     <string name="edit_button">EDIT LOCATION</string>
     <string name="save_button">SAVE &amp; GO</string>
+
+
+    <!--in HistoryActivity-->
+    <string name="dont_ask_again">Don\'t ask again</string>
+    <string name="permanently_delete_camera">Permanently delete this camera?</string>
+    <string name="history_type_text">Type: %s</string>
+    <string name="history_area_text">Area: %s</string>
+    <string name="history_training_text">Training Capture</string>
+    <string name="history_upload_text">Upload: %s</string>
 </resources>
