@@ -71,6 +71,15 @@ public class MapStorageUtils {
           "ceiling",
           "street_lamp"));
 
+public final static int SIGN_UNDEFINED = -1;
+public final static int SIGN_NOT_PRESENT = 0;
+public final static int SIGN_PRESENT = 1;
+
+public final static int COMPLETE_SIGN_UNDEFINED = -1;
+public final static int COMPLETE_SIGN_NOT_PRESENT = 0;
+public final static int COMPLETE_SIGN_PRESENT = 1;
+
+
   // accessible for every app for now
   final static String SYNCHRONIZED_PATH = Environment.getExternalStoragePublicDirectory(
           Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/unsurv/cameras/synchronized/";

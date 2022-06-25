@@ -1,15 +1,11 @@
 package org.unsurv.unsurv_mapping.ui.home;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 
 
@@ -27,6 +23,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -50,7 +49,6 @@ import org.osmdroid.views.overlay.CopyrightOverlay;
 import org.osmdroid.views.overlay.Overlay;
 import org.unsurv.unsurv_mapping.BottomAnchorIconOverlay;
 import org.unsurv.unsurv_mapping.CameraRepository;
-import org.unsurv.unsurv_mapping.ChooseImageAdapter;
 import org.unsurv.unsurv_mapping.MainActivity;
 import org.unsurv.unsurv_mapping.MapLocationUtils;
 import org.unsurv.unsurv_mapping.MapStorageUtils;
@@ -64,7 +62,6 @@ import org.unsurv.unsurv_mapping.SurveillanceCamera;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,8 +91,8 @@ public class EditCameraFragment extends Fragment {
     ImageView detailCameraImageView;
     MapView map;
 
+    EditText cameraOwner;
     TextView timestampTextView;
-    TextView uploadTextView;
 
     Spinner cameraTypeSpinner;
 
@@ -111,6 +108,12 @@ public class EditCameraFragment extends Fragment {
 
     SeekBar angleSeekBar;
     TextView angleTextView;
+
+    CheckBox hasSignCheckbox;
+    CheckBox hasCompleteSignCheckbox;
+
+    TextView hasSignStatusTextView;
+    TextView hasCompleteSignStatusTextView;
 
     Button saveButton;
     Button editButton;
@@ -214,8 +217,13 @@ public class EditCameraFragment extends Fragment {
 
         mountSpinner = v.findViewById(R.id.edit_camera_mount_selection);
 
+        hasSignCheckbox = v.findViewById(R.id.edit_camera_has_signage_checkbox);
+        hasCompleteSignCheckbox = v.findViewById(R.id.edit_camera_complete_signage_checkbox);
+
+        hasSignStatusTextView = v.findViewById(R.id.edit_camera_signage_status);
+        hasCompleteSignStatusTextView = v.findViewById(R.id.edit_camera_complete_signage_status);
+
         timestampTextView = v.findViewById(R.id.edit_camera_timestamp_text);
-        uploadTextView = v.findViewById(R.id.edit_camera_upload_text);
 
         saveButton = v.findViewById(R.id.edit_camera_save_button);
         editButton = v.findViewById(R.id.edit_camera_edit_button);
@@ -532,6 +540,85 @@ public class EditCameraFragment extends Fragment {
             }
         });
 
+        timestampTextView.setText(cameraToEdit.getTimestamp());
+
+
+        int hasSign = cameraToEdit.getHasSignage();
+
+        switch (hasSign) {
+
+            case MapStorageUtils.SIGN_UNDEFINED:
+                hasSignStatusTextView.setText(getString(R.string.sign_status_no_info));
+                break;
+
+            case MapStorageUtils.SIGN_PRESENT:
+                hasSignStatusTextView.setText(getString(R.string.sign_status_yes));
+                hasSignCheckbox.setChecked(true);
+                break;
+
+            case MapStorageUtils.SIGN_NOT_PRESENT:
+                hasSignStatusTextView.setText(getString(R.string.sign_status_no));
+                hasSignCheckbox.setChecked(false);
+                break;
+        }
+
+        hasSignCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b) {
+                    cameraToEdit.setHasSignage(MapStorageUtils.SIGN_PRESENT);
+                    hasSignStatusTextView.setText(getString(R.string.sign_status_yes));
+
+                }
+                else {
+                    cameraToEdit.setHasSignage(MapStorageUtils.SIGN_NOT_PRESENT);
+                    hasSignStatusTextView.setText(getString(R.string.sign_status_no));
+
+                }
+
+
+            }
+        });
+
+        int hasCompleteSign = cameraToEdit.getCompleteSignage();
+
+        switch (hasSign) {
+
+            case MapStorageUtils.SIGN_UNDEFINED:
+                hasCompleteSignStatusTextView.setText(getString(R.string.sign_status_no_info));
+                break;
+
+            case MapStorageUtils.SIGN_PRESENT:
+                hasCompleteSignStatusTextView.setText(getString(R.string.sign_status_yes));
+                hasCompleteSignCheckbox.setChecked(true);
+                break;
+
+            case MapStorageUtils.SIGN_NOT_PRESENT:
+                hasCompleteSignStatusTextView.setText(getString(R.string.sign_status_no));
+                hasCompleteSignCheckbox.setChecked(false);
+                break;
+        }
+
+        hasCompleteSignCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b) {
+                    cameraToEdit.setCompleteSignage(MapStorageUtils.COMPLETE_SIGN_PRESENT);
+                    hasCompleteSignStatusTextView.setText(getString(R.string.sign_status_yes));
+
+                }
+                else {
+                    cameraToEdit.setCompleteSignage(MapStorageUtils.COMPLETE_SIGN_NOT_PRESENT);
+                    hasCompleteSignStatusTextView.setText(getString(R.string.sign_status_no));
+
+                }
+
+
+            }
+        });
+
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -817,7 +904,7 @@ public class EditCameraFragment extends Fragment {
 
         // Setting starting position and zoom level.
         GeoPoint cameraLocation = new GeoPoint(cameraToEdit.getLatitude(), cameraToEdit.getLongitude());
-        mapController.setZoom(16.0);
+        mapController.setZoom(17.0);
         mapController.setCenter(cameraLocation);
 
         map.getOverlays().remove(iconOverlay);

@@ -90,7 +90,9 @@ public abstract class CameraRoomDatabase extends RoomDatabase {
               false,
               false,
               "",
-              "");
+              "",
+              -1,
+              -1);
 
 
       // mDao.insert(single);
@@ -119,7 +121,9 @@ public abstract class CameraRoomDatabase extends RoomDatabase {
                 false,
                 false,
                 "",
-                "");
+                "",
+                -1,
+                -1);
 
 
         SurveillanceCamera trainingCamera = new SurveillanceCamera(
@@ -140,7 +144,9 @@ public abstract class CameraRoomDatabase extends RoomDatabase {
                 false,
                 true,
                 "[{\"0\":\"357 240 691 440\"},{\"0\":\"42 296 364 500\"},{\"1\":\"5 494 367 677\"},{\"1\":\"372 482 708 711\"}]",
-                "");
+                "",
+                -1,
+                -1);
 
 
         // mDao.insert(surveillanceCamera);

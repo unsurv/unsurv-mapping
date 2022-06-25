@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/fragment_edit_camera.xml" value="0.25630676084762866" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.4306256306760848" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.25630676084762866" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.625" />
       </map>
     </option>

@@ -236,23 +236,20 @@ public class MapFragment extends Fragment {
             public void onClick(View view) {
                 IGeoPoint center = mapView.getMapCenter();
 
-                SimpleDateFormat timestampIso8601 = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                SimpleDateFormat timestampIso8601 = new SimpleDateFormat("k:m", Locale.US);
 
                 long currentTime = System.currentTimeMillis();
 
-                String currentDateOrNull;
+                String currentDate;
 
-                if (sharedPreferences.getBoolean("showCaptureTimestamps", false)){
-                    currentDateOrNull = timestampIso8601.format(new Date(currentTime));
-                } else {
-                    currentDateOrNull = null;
-                }
+                currentDate = timestampIso8601.format(new Date(currentTime));
+
 
                 // when editing camera location, a new marker is created in the center of the map
                 // get center coordinates when save button is pressed
                 SurveillanceCamera manualCamera = new SurveillanceCamera(
                         cameraType,
-                        0,
+                        MapStorageUtils.AREA_PUBLIC,
                         -1,
                         0,
                         5,
@@ -263,14 +260,16 @@ public class MapFragment extends Fragment {
                         center.getLatitude(),
                         center.getLongitude(),
                         "",
-                        currentDateOrNull,
+                        currentDate,
                         null,
                         false,
                         false,
                         true,
                         false,
                         "",
-                        ""
+                        "",
+                        MapStorageUtils.SIGN_UNDEFINED,
+                        MapStorageUtils.COMPLETE_SIGN_UNDEFINED
 
                 );
 

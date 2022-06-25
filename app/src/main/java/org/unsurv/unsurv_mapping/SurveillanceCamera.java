@@ -57,6 +57,9 @@ public class SurveillanceCamera {
   // all images associated with the object
   private String captureFilenames;
 
+  private int hasSignage;
+  private int completeSignage;
+
 
   public SurveillanceCamera(int cameraType,
                             int area,
@@ -77,7 +80,9 @@ public class SurveillanceCamera {
                             boolean manualCapture,
                             boolean trainingCapture,
                             String drawnRectsAsString,
-                            String captureFilenames){
+                            String captureFilenames,
+                            int hasSignage,
+                            int completeSignage){
 
     this.cameraType = cameraType;
     this.area = area;
@@ -109,9 +114,11 @@ public class SurveillanceCamera {
     this.drawnRectsAsString = drawnRectsAsString;
     this.captureFilenames = captureFilenames;
 
+    this.hasSignage = hasSignage;
+    this.completeSignage = completeSignage;
+
 
   }
-
 
 
   public long getId() {
@@ -214,6 +221,9 @@ public class SurveillanceCamera {
     return filteredFilenames.toArray(new String[0]);
   }
 
+  public int getHasSignage(){ return hasSignage; }
+  public int getCompleteSignage(){ return completeSignage; }
+
 
   public void setId(long id) {
     this.id = id;
@@ -282,6 +292,14 @@ public class SurveillanceCamera {
     this.captureFilenames = captureFilenames;
   }
 
+  public void setHasSignage(int hasSignage) {
+    this.hasSignage = hasSignage;
+  }
+
+  public void setCompleteSignage(int comepleteSignage) {
+    this.completeSignage = comepleteSignage;
+  }
+
   @NonNull
   public String toString(boolean onlyCaptures){
 
@@ -319,7 +337,6 @@ public class SurveillanceCamera {
       return joiner.toString() + "," + drawnRectsAsString; // don't end with comma
 
     }
-
   }
 
 //TODO add delete function to delete all Files connected to specific camera
