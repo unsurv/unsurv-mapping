@@ -15,7 +15,7 @@
             app:destination="@id/editCameraFragment" />
         <action
             android:id="@+id/action_navigation_map_to_navigation_settings"
-            app:destination="@id/navigation_settings" />
+            app:destination="@id/organize_fragment" />
     </fragment>
 
     <fragment
@@ -29,10 +29,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_settings"
-        android:name="org.unsurv.unsurv_mapping.ui.home.SettingsFragment"
+        android:id="@+id/organize_fragment"
+        android:name="org.unsurv.unsurv_mapping.ui.home.OrganizeFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_organize" />
 
     <fragment
         android:label="@string/title_edit_camera"

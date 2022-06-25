@@ -27,9 +27,6 @@
     <string name="edit_button">EDIT LOCATION</string>
     <string name="save_button">SAVE &amp; GO</string>
 
-
-
-
     <!--in HistoryActivity-->
     <string name="dont_ask_again">Don\'t ask again</string>
     <string name="permanently_delete_camera">Permanently delete this camera?</string>
@@ -37,6 +34,27 @@
     <string name="history_area_text">Area: %s</string>
     <string name="history_training_text">Training Capture</string>
     <string name="history_upload_text">Upload: %s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="history_timestamp_text">Captured at: %s</string>
+
+    <!--in OrganizeActivity-->
+
+    <string name="organize_lock_grid">Lock grid + map:</string>
+    <string name="organize_center_lat">Center latitude:</string>
+    <string name="organize_center_lon">Center longitude:</string>
+    <string name="organize_y_size">Height (m):</string>
+    <string name="organize_x_size">Length (m):</string>
+    <string name="organize_rows">Rows:</string>
+    <string name="organize_columns">Columns:</string>
+
+    <string name="organize_reset_button">reset</string>
+    <string name="organize_draw_button">Draw Grid</string>
+    <string name="organize_export">EXPORT</string>
+
+    <string name="organize_hint_lat">Latitude</string>
+    <string name="organize_hint_lon">Longitude</string>
+    <string name="organize_hint_length">Length</string>
+    <string name="organize_hint_height">Height</string>
+    <string name="organize_hint_rows">Rows</string>
+    <string name="organize_hint_columns">Columns</string>
+
 </resources>

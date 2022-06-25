@@ -150,18 +150,16 @@ public class CameraListAdapter extends RecyclerView.Adapter<CameraListAdapter.Ca
                         break;
                 }
 
-                String uploadDate = current.getTimeToSync();
-
+                String timestamp = current.getTimestamp();
 
                 // display type, area and upload date for regular captures
                 holder.topTextViewInItem.setText(
                         ctx.getString(R.string.history_type_text, MapStorageUtils.typeList.get(cameraType)));
 
-                holder.middleTextViewInItem.setText(
-                        ctx.getString(R.string.history_area_text, MapStorageUtils.areaList.get(cameraArea)));
+                // holder.middleTextViewInItem.setText(ctx.getString(R.string.history_area_text, MapStorageUtils.areaList.get(cameraArea)));
 
-                holder.bottomTextViewInItem.setText(
-                        ctx.getString(R.string.history_upload_text, uploadDate));
+                holder.middleTextViewInItem.setText(
+                        ctx.getString(R.string.history_timestamp_text, timestamp));
 
             }
 

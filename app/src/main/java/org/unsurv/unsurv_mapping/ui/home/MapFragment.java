@@ -1,10 +1,9 @@
 package org.unsurv.unsurv_mapping.ui.home;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -17,12 +16,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.loader.app.LoaderManager;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.unsurv_mapping.R;
@@ -55,7 +52,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class MapFragment extends Fragment {
 
@@ -101,6 +97,17 @@ public class MapFragment extends Fragment {
         addDomeCameraButton = binding.manualCaptureAddDomeCameraButton;
         addUnknownCameraButton = binding.manualCaptureAddUnknownCameraButton;
         manualToGrid = binding.manualToGrid;
+
+        // set workshop
+
+        // FFM "50.1146" , "8.6822"
+
+        String wLatFFM = "50.1146";
+        String wLonFFM = "8.6822";
+
+
+        sharedPreferences.edit().putString("workshopLat", wLatFFM).apply();
+        sharedPreferences.edit().putString("workshopLon", wLonFFM).apply();
 
         if (offlineMode) {
 
@@ -204,12 +211,15 @@ public class MapFragment extends Fragment {
             }
         }, 200));
 
+        Resources res = getContext().getResources();
+        Drawable cameraMarkerIcon = ResourcesCompat.getDrawable(res, R.drawable.simple_marker_5dpi, null);
+
         // add different types depending on user choice
         addStandardCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cameraType = MapStorageUtils.FIXED_CAMERA;
-                marker.setImageDrawable(getContext().getDrawable(R.drawable.standard_camera_marker_5_dpi));
+                marker.setImageDrawable(ResourcesCompat.getDrawable(res, R.drawable.standard_camera_marker_5_dpi, null));
             }
         });
 
@@ -217,7 +227,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cameraType = MapStorageUtils.DOME_CAMERA;
-                marker.setImageDrawable(getContext().getDrawable(R.drawable.dome_camera_marker_5_dpi));
+                marker.setImageDrawable(ResourcesCompat.getDrawable(res, R.drawable.dome_camera_marker_5_dpi, null));
 
             }
         });
@@ -226,10 +236,12 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cameraType = MapStorageUtils.PANNING_CAMERA;
-                marker.setImageDrawable(getContext().getDrawable(R.drawable.unknown_camera_marker_5dpi));
+                marker.setImageDrawable(ResourcesCompat.getDrawable(res, R.drawable.unknown_camera_marker_5dpi, null));
 
             }
         });
+
+        NavController navController = NavHostFragment.findNavController(requireParentFragment());
 
         manualSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,13 +306,19 @@ public class MapFragment extends Fragment {
                         Bundle args = new Bundle();
                         args.putLong("cameraId", idFromInsert);
 
-                        NavController navController = NavHostFragment.findNavController(requireParentFragment());
                         navController.navigate(R.id.editCameraFragment, args);
                     }
                 }, 1000);
 
+            }
+
+        });
 
 
+        manualToGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.organize_fragment);
 
             }
         });
