@@ -36,6 +36,7 @@ import org.osmdroid.tileprovider.modules.OfflineTileProvider;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
+import org.osmdroid.tileprovider.util.StorageUtils;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
@@ -46,6 +47,7 @@ import org.osmdroid.views.overlay.OverlayManager;
 import org.osmdroid.views.overlay.Polyline;
 import org.unsurv.unsurv_mapping.CameraRepository;
 import org.unsurv.unsurv_mapping.MapLocationUtils;
+import org.unsurv.unsurv_mapping.MapStorageUtils;
 import org.unsurv.unsurv_mapping.SurveillanceCamera;
 
 import java.io.File;
@@ -91,7 +93,7 @@ public class OrganizeFragment extends Fragment {
 
     Button resetButton;
     Button drawButton;
-    Button backButton;
+    Button exportButton;
 
     Context context;
     Resources resources;
@@ -265,7 +267,7 @@ public class OrganizeFragment extends Fragment {
 
         resetButton = v.findViewById(R.id.organize_reset);
         drawButton = v.findViewById(R.id.organize_draw);
-        backButton = v.findViewById(R.id.organize_export);
+        exportButton = v.findViewById(R.id.organize_export);
 
         overlayItemsToDisplay = new ArrayList<>();
 
@@ -423,6 +425,18 @@ public class OrganizeFragment extends Fragment {
 
 
 
+            }
+        });
+
+        exportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<SurveillanceCamera> allCameras = cameraRepository.getAllCameras();
+                if(MapStorageUtils.exportCaptures(allCameras)) {
+                    Toast.makeText(getContext(), "Successfully exported data to /Documents/export.txt", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "Failed to export data", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

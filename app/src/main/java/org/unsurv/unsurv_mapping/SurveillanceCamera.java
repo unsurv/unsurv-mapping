@@ -308,6 +308,37 @@ public class SurveillanceCamera {
 
     if (onlyCaptures) {
 
+      String hasSign = "";
+      String hasCompleteSign = "";
+
+      switch (hasSignage) {
+        case MapStorageUtils.SIGN_UNDEFINED:
+          hasSign = "undef";
+          break;
+
+        case MapStorageUtils.SIGN_NOT_PRESENT:
+          hasSign = "n";
+          break;
+
+        case MapStorageUtils.SIGN_PRESENT:
+          hasSign = "y";
+          break;
+      }
+
+      switch (completeSignage) {
+        case MapStorageUtils.COMPLETE_SIGN_UNDEFINED:
+          hasCompleteSign = "undef";
+          break;
+
+        case MapStorageUtils.COMPLETE_SIGN_NOT_PRESENT:
+          hasCompleteSign = "n";
+          break;
+
+        case MapStorageUtils.COMPLETE_SIGN_PRESENT:
+          hasCompleteSign = "y";
+          break;
+      }
+
       joiner.add(String.valueOf(cameraType))
               .add(String.valueOf(area))
               .add(String.valueOf(direction))
@@ -316,6 +347,8 @@ public class SurveillanceCamera {
               .add(String.valueOf(angle))
               .add(thumbnailPath)
               .add(imagePath)
+              .add(hasSign)
+              .add(hasCompleteSign)
               .add(String.valueOf(latitude));
 
       return joiner.toString() + "," + longitude; // don't end with comma

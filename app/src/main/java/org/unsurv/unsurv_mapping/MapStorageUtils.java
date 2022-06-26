@@ -341,13 +341,14 @@ public final static int COMPLETE_SIGN_PRESENT = 1;
 
   public static boolean exportCaptures(List<SurveillanceCamera> camerasToExport) {
 
+    // TODO replace ints in export with names, should be ok in txt export
 
-    String exportPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-            .getAbsolutePath() + "/unsurv/export/captures/";
+    String exportPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            .getAbsolutePath() + "/";
 
     String filename = "export.txt";
 
-    String header = "TYPE,AREA,DIRECTION,MOUNT,HEIGHT,ANGLE,THUMBNAIL,IMAGE,LAT,LON\n";
+    String header = "TYPE,AREA,DIRECTION,MOUNT,HEIGHT,ANGLE,THUMBNAIL,IMAGE,SIGN,CSIGN,LAT,LON\n";
 
     File exportDir = new File(exportPath);
     exportDir.mkdirs();
