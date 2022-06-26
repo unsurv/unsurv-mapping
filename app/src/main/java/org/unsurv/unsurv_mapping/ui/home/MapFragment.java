@@ -1,7 +1,9 @@
 package org.unsurv.unsurv_mapping.ui.home;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,7 +17,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -40,6 +46,7 @@ import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.CopyrightOverlay;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.unsurv.unsurv_mapping.CameraDao;
 import org.unsurv.unsurv_mapping.CameraRepository;
 import org.unsurv.unsurv_mapping.CameraRoomDatabase;
@@ -49,6 +56,7 @@ import org.unsurv.unsurv_mapping.SurveillanceCamera;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -77,12 +85,47 @@ public class MapFragment extends Fragment {
     private int cameraType;
     private FragmentManager fragmentManager;
 
+    private MyLocationNewOverlay myLocationOverlay;
+    ImageButton myLocationButton;
+
+    int fineLocationPermission;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ActivityResultLauncher<String> requestPermissionLauncher =
+                registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                    if (isGranted) {
+                        // Permission is granted. Continue the action or workflow in your
+                        // app.
+                    } else {
+                        Toast.makeText(requireContext(),
+                                "Storage permission needed for database and export.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        // check permissions on resume
+        fineLocationPermission = ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+
+        if (fineLocationPermission != PackageManager.PERMISSION_GRANTED) {
+            requestPermissionLauncher.launch(
+                    Manifest.permission.ACCESS_FINE_LOCATION
+
+            );
+        }
+
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         fragmentManager = getActivity().getSupportFragmentManager();
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View v = binding.getRoot();
         Context app = MainActivity.applicationContext;
         cameraRepository = new CameraRepository(app);
         CameraRoomDatabase db = CameraRoomDatabase.getDatabase(requireActivity().getApplication());
@@ -211,6 +254,31 @@ public class MapFragment extends Fragment {
             }
         }, 200));
 
+
+        // myLocationOverlay
+        myLocationOverlay = new MyLocationNewOverlay(mapView);
+        myLocationOverlay.enableMyLocation();
+
+        // TODO manage following
+        // myLocationOverlay.enableFollowLocation();
+        myLocationOverlay.setDrawAccuracyEnabled(true);
+        mapController.setCenter(myLocationOverlay.getMyLocation());
+        mapView.getOverlays().add(myLocationOverlay);
+
+        // Button to find user location.
+        myLocationButton = v.findViewById(R.id.my_location_button);
+        myLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapController.setCenter(myLocationOverlay.getMyLocation());
+                mapController.setZoom(20.0);
+            }
+        });
+
+
+
+        // TODO add cameraoverlay?
+
         Resources res = getContext().getResources();
         Drawable cameraMarkerIcon = ResourcesCompat.getDrawable(res, R.drawable.simple_marker_5dpi, null);
 
@@ -323,7 +391,7 @@ public class MapFragment extends Fragment {
             }
         });
 
-        return root;
+        return v;
     }
 
     @Override
