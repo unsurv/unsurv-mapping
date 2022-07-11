@@ -12,12 +12,31 @@
         android:layout_weight="9"
         android:orientation="vertical">
 
-
-        <org.osmdroid.views.MapView
-            android:id="@+id/organize_camera_map"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0sp"
-            android:layout_weight="6"/>
+            android:layout_weight="6"
+            >
+
+            <org.osmdroid.views.MapView
+                android:id="@+id/organize_camera_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageButton
+                android:id="@+id/organize_my_location_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_my_location_white_24dp" />
+
+
+        </RelativeLayout>
+
+
 
 
         <ScrollView

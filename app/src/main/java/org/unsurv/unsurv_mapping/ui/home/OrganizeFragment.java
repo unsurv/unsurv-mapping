@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.unsurv_mapping.R;
@@ -45,6 +46,7 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.OverlayManager;
 import org.osmdroid.views.overlay.Polyline;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.unsurv.unsurv_mapping.CameraRepository;
 import org.unsurv.unsurv_mapping.MapLocationUtils;
 import org.unsurv.unsurv_mapping.MapStorageUtils;
@@ -97,6 +99,9 @@ public class OrganizeFragment extends Fragment {
 
     Context context;
     Resources resources;
+
+    private MyLocationNewOverlay myLocationOverlay;
+    ImageButton myLocationButton;
 
 
     public OrganizeFragment() {
@@ -346,6 +351,26 @@ public class OrganizeFragment extends Fragment {
 
             }
         }, 200));
+
+
+        myLocationOverlay = new MyLocationNewOverlay(map);
+        myLocationOverlay.enableMyLocation();
+
+        // TODO manage following
+        // myLocationOverlay.enableFollowLocation();
+        myLocationOverlay.setDrawAccuracyEnabled(true);
+        mapController.setCenter(myLocationOverlay.getMyLocation());
+        map.getOverlays().add(myLocationOverlay);
+
+        // Button to find user location.
+        myLocationButton = v.findViewById(R.id.organize_my_location_button);
+        myLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapController.setCenter(myLocationOverlay.getMyLocation());
+                mapController.setZoom(20.0);
+            }
+        });
 
 
         lockSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
