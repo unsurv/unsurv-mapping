@@ -458,7 +458,7 @@ public class OrganizeFragment extends Fragment {
             public void onClick(View view) {
                 List<SurveillanceCamera> allCameras = cameraRepository.getAllCameras();
                 if(MapStorageUtils.exportCaptures(allCameras)) {
-                    Toast.makeText(getContext(), "Successfully exported data to /Documents/export.txt", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Successfully exported data to /Documents/timestamp/export.txt", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "Failed to export data", Toast.LENGTH_LONG).show();
                 }

@@ -343,8 +343,10 @@ public final static int COMPLETE_SIGN_PRESENT = 1;
 
     // TODO replace ints in export with names, should be ok in txt export
 
+    long time = System.currentTimeMillis();
+
     String exportPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-            .getAbsolutePath() + "/";
+            .getAbsolutePath() + "/" + time + "/";
 
     String filename = "export.txt";
 

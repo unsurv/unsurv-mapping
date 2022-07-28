@@ -696,6 +696,8 @@ public class EditCameraFragment extends Fragment {
 
                 NavController navController =  NavHostFragment.findNavController(getParentFragment());
 
+                navController.navigate(R.id.navigation_map);
+
 
 
             }

@@ -243,9 +243,6 @@ public class CameraListAdapter extends RecyclerView.Adapter<CameraListAdapter.Ca
                     NavController navController = NavHostFragment.findNavController(mParentFragment);
                     navController.navigate(R.id.editCameraFragment, args);
 
-
-
-
                 }
             });
 
