@@ -270,8 +270,29 @@ public class MapFragment extends Fragment {
         myLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapController.setCenter(myLocationOverlay.getMyLocation());
-                mapController.setZoom(20.0);
+                IGeoPoint mapCenter = mapView.getMapCenter();
+
+                GeoPoint geoPointMapCenter = new GeoPoint(mapCenter.getLatitude(), mapCenter.getLongitude());
+
+                GeoPoint myLocation =  myLocationOverlay.getMyLocation();
+
+                if (myLocation == null) {
+                    Toast.makeText(app, "GPS location not available.", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    double distance = geoPointMapCenter.distanceToAsDouble(myLocation);
+
+                    // pan only if location is close < 200 km
+                    // without this we literally land in Africa if location has not been reported
+                    if (distance < 500 * 1000) {
+                        mapController.setCenter(myLocation);
+                        mapController.setZoom(20.0);
+
+                    } else {
+                        Toast.makeText(app, "distance to GPS location > 500 km", Toast.LENGTH_LONG).show();
+                    }
+                }
+
             }
         });
 
