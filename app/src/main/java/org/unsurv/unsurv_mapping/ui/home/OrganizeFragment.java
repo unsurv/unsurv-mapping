@@ -86,6 +86,7 @@ public class OrganizeFragment extends Fragment {
     List<Polyline> lines = new ArrayList<>();
 
     SwitchCompat lockSwitch;
+    SwitchCompat offlineSwitch;
     EditText centerLat;
     EditText centerLon;
     EditText gridLength;
@@ -209,8 +210,8 @@ public class OrganizeFragment extends Fragment {
 
                                 map.setTileSource(new XYTileSource(
                                         "tiles",
-                                        10,
-                                        15,
+                                        1,
+                                        18,
                                         256,
                                         ".png",
                                         new String[]{""}
@@ -254,6 +255,7 @@ public class OrganizeFragment extends Fragment {
         cameraRepository = new CameraRepository(requireActivity().getApplication());
 
         lockSwitch = v.findViewById(R.id.organize_lock_grid);
+        offlineSwitch = v.findViewById(R.id.organize_columns_offline);
         centerLat = v.findViewById(R.id.organize_center_lat_edit);
         centerLon = v.findViewById(R.id.organize_center_lon_edit);
 
@@ -378,6 +380,17 @@ public class OrganizeFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 lockState = b;
                 sharedPreferences.edit().putBoolean("organizeLockState", b).apply();
+            }
+        });
+
+        boolean offlineState = sharedPreferences.getBoolean("offlineMode", true);
+
+        offlineSwitch.setChecked(offlineState);
+
+        offlineSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                sharedPreferences.edit().putBoolean("offlineMode", b).apply();
             }
         });
 

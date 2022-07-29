@@ -187,8 +187,8 @@ public class MapFragment extends Fragment {
 
                                 mapView.setTileSource(new XYTileSource(
                                         "tiles",
-                                        6,
-                                        16,
+                                        1,
+                                        18,
                                         256,
                                         ".png",
                                         new String[]{""}));

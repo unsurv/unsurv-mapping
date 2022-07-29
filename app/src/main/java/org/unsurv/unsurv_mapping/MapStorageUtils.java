@@ -346,9 +346,9 @@ public final static int COMPLETE_SIGN_PRESENT = 1;
     long time = System.currentTimeMillis();
 
     String exportPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-            .getAbsolutePath() + "/" + time + "/";
+            .getAbsolutePath() + "/unsurv/";
 
-    String filename = "export.txt";
+    String filename = time + "export.txt";
 
     String header = "TYPE,AREA,DIRECTION,MOUNT,HEIGHT,ANGLE,THUMBNAIL,IMAGE,SIGN,CSIGN,LAT,LON\n";
 

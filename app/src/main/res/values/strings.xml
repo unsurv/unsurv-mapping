@@ -45,6 +45,7 @@
     <string name="organize_x_size">Length (m):</string>
     <string name="organize_rows">Rows:</string>
     <string name="organize_columns">Columns:</string>
+    <string name="organize_offline">Offline mode:</string>
 
     <string name="organize_reset_button">reset</string>
     <string name="organize_draw_button">Draw Grid</string>
@@ -56,5 +57,6 @@
     <string name="organize_hint_height">Height</string>
     <string name="organize_hint_rows">Rows</string>
     <string name="organize_hint_columns">Columns</string>
+    <string name="organize_hint_offline">offline mode</string>
 
 </resources>
