@@ -431,7 +431,8 @@ public class MapFragment extends Fragment {
 
         } else {
 
-            String homeZone = sharedPreferences.getString("area", "51.124, 51.055, 5.823, 14.7 ");
+            String homeZone = sharedPreferences.getString("area", "53.436499, 53.632616, 9.828224, 10.22123");
+            // Hamburg 9.828224,53.436499,10.22123,53.632616
 
             String[] coordinates = homeZone.split(",");
 

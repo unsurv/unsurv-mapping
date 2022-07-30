@@ -312,7 +312,8 @@ public class OrganizeFragment extends Fragment {
             mapController.setCenter(centerMap);
         } else {
             // Setting starting position and zoom level.
-            centerMap = new GeoPoint(49.9955, 8.2856);
+            // Hamburg 53.5609,9.9855
+            centerMap = new GeoPoint(53.5609, 9.9855);
             mapController.setZoom(13.0);
             mapController.setCenter(centerMap);
         }
@@ -330,7 +331,7 @@ public class OrganizeFragment extends Fragment {
                 sharedPreferences.edit().putString("gridCenterLon", String.valueOf(centerMap.getLongitude())).apply();
 
 
-                centerLat.setText(String.valueOf(Math.round(centerAfterScroll.getLatitude())));
+                centerLat.setText(String.valueOf(centerAfterScroll.getLatitude()));
                 centerLon.setText(String.valueOf(centerAfterScroll.getLongitude()));
 
 
@@ -418,12 +419,12 @@ public class OrganizeFragment extends Fragment {
 
                                     deleteGrid();
 
-
-                                    double workshopLat = Double.parseDouble(sharedPreferences.getString("workshopLat", "50.1146"));
-                                    double workshopLon = Double.parseDouble(sharedPreferences.getString("workshopLon", "8.6822"));
+                                    // Hamburg 53.5609,9.9855
+                                    double workshopLat = Double.parseDouble(sharedPreferences.getString("workshopLat", "53.5609"));
+                                    double workshopLon = Double.parseDouble(sharedPreferences.getString("workshopLon", "9.9855"));
 
                                     centerMap = new GeoPoint(workshopLat, workshopLon);
-                                    mapController.setZoom(14.0);
+                                    mapController.setZoom(12.0);
                                     mapController.setCenter(centerMap);
                                     redrawMap();
 
